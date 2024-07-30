@@ -18,7 +18,7 @@ def algorithm(n_nodes, n_edges, edge_list, node_sorted, edge_data):
         node_list_2 = node_sorted[i:] + node_sorted[:i]
         for n in node_list_2:
             temp_unique_colours = len(set([x for x in colour_tuple if not np.isnan(x)]))
-            if temp_unique_colours > min(temp_colours):
+            if temp_unique_colours >= min(temp_colours):
                 break
             else:
                 colour_tuple[n] = colour_choice[n][0]
@@ -43,7 +43,7 @@ def algorithm(n_nodes, n_edges, edge_list, node_sorted, edge_data):
 
 
 with open(
-        r'C:\Users\AjithSreenivasan\OneDrive - Robinson Bowmaker Paul\Coursera\Discrete Optimization\graph_coloring_2\Graph coloring\coloring\data\gc_4_1',
+        r'C:\Users\AjithSreenivasan\OneDrive - Robinson Bowmaker Paul\Coursera\Discrete Optimization\graph_coloring_2\Graph coloring\coloring\data\gc_250_9',
         'r') as input_data_file:
     input_data = input_data_file.read()
 data_list = input_data.split()
