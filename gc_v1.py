@@ -42,15 +42,13 @@ def algorithm(n_nodes, n_edges, edge_list, node_list, edge_data):
     count_edges = sorted(Counter(edge_data).items())
 
     # list of colors
-    colour_list = [i for i in range(0, 5)]
+    colour_list = [i for i in range(0, 50)]
 
     n = 0
-    colour_count = 0
     colour_tuple = [np.nan for i in node_list]
     colour_choice = [colour_list for i in node_list]
-    while n < n_edges + 1:
-        temp_list = []
-        colour_tuple[n] = colour_choice[n][colour_count]
+    for n in node_list:
+        colour_tuple[n] = colour_choice[n][0]
         sublist = [sub for sub in edge_list if n in sub]
         adjacent_nodes = [item for sub in sublist for item in sub if item != n]
         # Iterate through each index in B
@@ -59,7 +57,6 @@ def algorithm(n_nodes, n_edges, edge_list, node_list, edge_data):
             if index < len(colour_choice):
                 # Remove all occurrences of 0 from the sublist at the given index
                 colour_choice[index] = [item for item in colour_choice[index] if item != colour_tuple[n]]
-        n += 1
 
     n_colours = len(set(colour_tuple))
     output_data_temp = str(n_colours) + ' ' + str(0) + '\n'
@@ -68,7 +65,7 @@ def algorithm(n_nodes, n_edges, edge_list, node_list, edge_data):
 
 
 with open(
-        r'C:\Users\AjithSreenivasan\OneDrive - Robinson Bowmaker Paul\Coursera\Discrete Optimization\graph_coloring_2\Graph coloring\coloring\data\gc_4_1',
+        r'C:\Users\AjithSreenivasan\OneDrive - Robinson Bowmaker Paul\Coursera\Discrete Optimization\graph_coloring_2\Graph coloring\coloring\data\gc_50_3',
         'r') as input_data_file:
     input_data = input_data_file.read()
 data_list = input_data.split()
@@ -86,7 +83,7 @@ node_list = [i for i in range(0, n_nodes)]
 # plotting(edge_list)
 
 
-output = algorithm(n_nodes, n_edges, edge_list, node_list, edge_data)
-
+output_data = algorithm(n_nodes, n_edges, edge_list, node_list, edge_data)
+print(output_data)
 
 
