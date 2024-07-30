@@ -13,9 +13,9 @@ def algorithm(n_nodes, n_edges, edge_list, node_sorted, edge_data):
     temp = []
     temp_colours = [500]
     for i in node_sorted:
+        colour_choice = [colour_list for i in node_sorted]
+        colour_tuple = [np.nan for i in node_sorted]
         node_list_2 = node_sorted[i:] + node_sorted[:i]
-        colour_choice = [colour_list for i in node_list_2]
-        colour_tuple = [np.nan for i in node_list_2]
         for n in node_list_2:
             temp_unique_colours = len(set([x for x in colour_tuple if not np.isnan(x)]))
             if temp_unique_colours > min(temp_colours):
@@ -31,16 +31,19 @@ def algorithm(n_nodes, n_edges, edge_list, node_sorted, edge_data):
                         # Remove all occurrences of 0 from the sublist at the given index
                         colour_choice[index] = [item for item in colour_choice[index] if item != colour_tuple[n]]
                 n_colours = len(set(colour_tuple))
-        temp_colours.append(n_colours)
-        temp.append([n_colours, colour_tuple, node_list_2])
+        if np.nan in colour_tuple:
+            pass
+        else:
+            temp_colours.append(n_colours)
+            temp.append([n_colours, colour_tuple, node_list_2])
 
     min_value = min(item[0] for item in temp)
     result = [item for item in temp if item[0] == min_value][0]
-    return result[0], result[1], result[2]
+    return result[0], result[1]
 
 
 with open(
-        r'C:\Users\AjithSreenivasan\OneDrive - Robinson Bowmaker Paul\Coursera\Discrete Optimization\graph_coloring_2\Graph coloring\coloring\data\gc_20_1',
+        r'C:\Users\AjithSreenivasan\OneDrive - Robinson Bowmaker Paul\Coursera\Discrete Optimization\graph_coloring_2\Graph coloring\coloring\data\gc_4_1',
         'r') as input_data_file:
     input_data = input_data_file.read()
 data_list = input_data.split()
@@ -61,7 +64,7 @@ node_sorted = [item[0] for item in node_sorted_tuple]
 # plotting(edge_list)
 
 
-number_colours, colours, new_order = algorithm(n_nodes, n_edges, edge_list, node_sorted, edge_data)
+number_colours, colours = algorithm(n_nodes, n_edges, edge_list, node_sorted, edge_data)
 
 output_data = str(number_colours) + ' ' + str(0) + '\n'
 output_data += ' '.join(map(str, colours))
