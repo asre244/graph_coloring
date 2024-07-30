@@ -9,7 +9,7 @@ def algorithm(n_nodes, n_edges, edge_list, node_sorted, edge_data):
 
     # list of colors
     colour_list = [i for i in range(0, 1000)]
-
+    count = n_nodes
     temp = []
     temp_colours = [500]
     for i in node_sorted:
@@ -36,7 +36,8 @@ def algorithm(n_nodes, n_edges, edge_list, node_sorted, edge_data):
         else:
             temp_colours.append(n_colours)
             temp.append([n_colours, colour_tuple, node_list_2])
-
+        count -= 1
+        print(count)
     min_value = min(item[0] for item in temp)
     result = [item for item in temp if item[0] == min_value][0]
     return result[0], result[1]
