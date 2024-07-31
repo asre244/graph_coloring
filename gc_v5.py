@@ -1,4 +1,4 @@
-"""Wrong"""
+
 
 from collections import Counter
 # import matplotlib.pyplot as plt
@@ -88,7 +88,7 @@ def algorithm_2(n_nodes, n_edges, edge_list, node_sorted, edge_data, number_colo
     return result[0], result[1]
 
 with open(
-        r'S:\Jobs\EPWA\EPNR\Script\TEST\Discrete Optimization\assignment_3\Graph coloring\coloring\data\gc_100_5',
+        r'S:\Jobs\EPWA\EPNR\Script\TEST\Discrete Optimization\assignment_3\Graph coloring\coloring\data\gc_250_9',
         'r') as input_data_file:
     input_data = input_data_file.read()
 data_list = input_data.split()
@@ -145,21 +145,27 @@ for i in range(len(node_sorted)):
         pairs.append((i, j))
 pairs.sort(key=lambda x: (x[1], x[0]))
 for i, j in pairs:
-    modified_list = node_sorted.copy()
-    modified_list[i], modified_list[j] = modified_list[j], modified_list[i]
+    counter += 1
+    if counter < 100:
+        modified_list = node_sorted.copy()
+        modified_list[i], modified_list[j] = modified_list[j], modified_list[i]
 
 
 
-    # Extract the first elements from the tuples in C_sorted_by_A
+        # Extract the first elements from the tuples in C_sorted_by_A
 
-    number_colours, colours = algorithm_2(n_nodes, n_edges, edge_list, modified_list, edge_data, number_colours)
-    solution_list.append([number_colours, colours])
-    number_colours = min(item[0] for item in solution_list)
-    result = [item for item in solution_list if item[0] == number_colours][0]
-    pass
-output_data = str(result[0]) + ' ' + str(0) + '\n'
-output_data += ' '.join(map(str, result[1]))
-print(output_data)
+        number_colours, colours = algorithm_2(n_nodes, n_edges, edge_list, modified_list, edge_data, number_colours)
+        solution_list.append([number_colours, colours])
+        number_colours = min(item[0] for item in solution_list)
+        result = [item for item in solution_list if item[0] == number_colours][0]
+        output_data = str(result[0]) + ' ' + str(0) + '\n'
+        output_data += ' '.join(map(str, result[1]))
+        print(output_data)
+    else:
+        break
+# output_data = str(result[0]) + ' ' + str(0) + '\n'
+# output_data += ' '.join(map(str, result[1]))
+# print(output_data)
 # result = [item for item in colour_tuple if item[1] == 7]
 # elements = [t[0] for t in result]
 # list = []
