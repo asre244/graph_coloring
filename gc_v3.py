@@ -14,7 +14,7 @@ def algorithm(n_nodes, n_edges, edge_list, node_sorted, edge_data):
     count = n_nodes
     temp = []
     temp_colours = [500]
-    for i in range(0, 10):
+    for i in range(0, n_nodes):
         colour_choice = [colour_list for i in node_sorted]
         colour_tuple = [np.nan for i in node_sorted]
         node_list_2 = node_sorted[i:] + node_sorted[:i]
