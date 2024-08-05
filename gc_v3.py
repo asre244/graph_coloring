@@ -1,4 +1,7 @@
-"""Wrong"""
+"""This is example of local minima
+
+The way the algorithm is structured us such that the def(color) cannot better the solution unless that initial solution
+configuration is changed"""
 
 from collections import Counter
 import matplotlib.pyplot as plt
@@ -47,7 +50,7 @@ def algorithm(n_nodes, n_edges, edge_list, node_sorted, edge_data):
 
 
 with open(
-        r'C:\Users\AjithSreenivasan\OneDrive - Robinson Bowmaker Paul\Coursera\Discrete Optimization\graph_coloring_2\Graph coloring\coloring\data\gc_250_9',
+        r'C:\Users\AjithSreenivasan\OneDrive - Robinson Bowmaker Paul\Coursera\Discrete Optimization\graph_coloring_2\Graph coloring\coloring\data\gc_50_3',
         'r') as input_data_file:
     input_data = input_data_file.read()
 data_list = input_data.split()
@@ -78,14 +81,51 @@ finish = time.time()
 print(finish - start)
 
 
-# colour_tuple = [(node_list[i], colours[i]) for i in range(0, n_nodes)]
-# result = [item for item in colour_tuple if item[1] == 7]
-# elements = [t[0] for t in result]
-# list = []
-# for element in elements:
-#     list.append([sub for sub in edge_list if element in sub])
-#     pass
-#
-# list = list[0]
-# elements_check = [t[0] for t in list]
-# result_1 = result = [t for t in colour_tuple if t[0] in elements_check]
+colour_tuple = [(node_list[i], colours[i]) for i in range(0, n_nodes)]
+
+
+"""not working
+
+
+def check(color, j):
+    if color != 0:
+        list = []
+        list.append([sub for sub in edge_list if j in sub])
+        list = list[0]
+        reordered_list = []
+        for t in list:
+            if t[0] != j:
+                reordered_list.append(t)
+            else:
+                reordered_list.append((t[1], t[0]))
+        elements_check = [t[0] for t in reordered_list]
+        neighbor_list = [t for t in colour_tuple if t[0] in elements_check]
+        neighbor_list_highest_color = [item for item in neighbor_list if item[1] == color - 1]
+        if neighbor_list_highest_color != []:
+            for neighbor_color in [t[0] for t in neighbor_list_highest_color]:
+                check(color - 1, neighbor_color)
+        else:
+            pass
+    else:
+        pass
+
+
+
+
+for i in range(number_colours - 1, -1, -1):
+    result = [item for item in colour_tuple if item[1] == i]
+    elements = [t[0] for t in result]
+    for element in elements:
+        check(i, element)
+    # result = [item for item in colour_tuple if item[1] == 7]
+    # elements = [t[0] for t in result]
+    # list = []
+    # for element in elements:
+    #     list.append([sub for sub in edge_list if element in sub])
+    #     pass
+    #
+    # list = list[0]
+    # elements_check = [t[0] for t in list]
+    # result_1 = result = [t for t in colour_tuple if t[0] in elements_check]
+
+"""
